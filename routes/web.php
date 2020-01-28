@@ -19,21 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('hola', function(){
-    return 'Hola Axel García';
-});
+Route::get('hola', 'HolaController');
 
 Route::get('usuario/{nombre}/comentario/{comentariod}', function($nombre="Mundo", $comentariod){
     return 'Hola '.$nombre .' y el comentario es: '. $comentariod;
 });
 
-Route::get('user/{nombre}', function($nombre){
-    return 'Usuario es '.$nombre;
-})->where('nombre','[A-Za-z]+'); // en minuscula z del final
+Route::get('usuario/{nombre?}','UsuarioController@usuarioUnParametro')->where('nombre','[A-Za-z]+'); // en minuscula z del final
 
-Route::get('user2/{id}/{nombre}', function($id, $nombre){
-    return 'Usuario es '.$id. ' y el nombre es: '.$nombre;
-})->where(
+Route::get('usuario/{id}/{nombre}','UsuarioController@usuarioDosParametros')->where(
     [
         'id' => '[0-9]+',
         'nombre' => '[A-Za-z]+'
